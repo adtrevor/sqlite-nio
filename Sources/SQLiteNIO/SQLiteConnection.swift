@@ -67,6 +67,11 @@ public final class SQLiteConnection {
     public var lastAutoincrementID: Int64? {
         return sqlite3_last_insert_rowid(self.handle)
     }
+    
+    /// The maximum number of parameters allowed in a single expression
+    public var maxVariableNumber: Int {
+        return Int(sqlite3_limit(self.handle, SQLITE_LIMIT_VARIABLE_NUMBER, -1))
+    }
 
     internal var errorMessage: String? {
         if let raw = sqlite3_errmsg(self.handle) {
